@@ -20,24 +20,34 @@ public class HomeController : Controller
 
     public IActionResult irASala1()
     {
-        redirecttoaction("salaCodigoCesar")
+        return RedirectToAction("salaCodigoCesar");
     }
-    bd bd = new bd();
-    codigoCesar codigo = new codigoCesar;
+    BD bd = new BD();
+    codigoCesar codigo = new codigoCesar();
     public IActionResult salaCodigoCesar()
-    {   codigo.corrimiento=5;
+    {   
+        codigo.corrimiento=5;
         codigo.letra=bd.mensajeCodigo();
         ViewBag.mensajeEncriptado = codigo.codigo();
+        ViewBag.mensajeOriginal = codigo.letra;
         return View();
     }
 
-     public IActionResult verificarCodigoC(string input)
+    public IActionResult verificarCodigoC(string input, string msj)
     {
-       if(msj == input) 
-        
-        return View();
+        Console.WriteLine(msj);
+        if(msj == input.ToUpper()){
+            return RedirectToAction("irASala2");
+        }
+        else{
+            return RedirectToAction("index");
+        }
     }
 
+    public IActionResult irASala2()
+    {
+        return RedirectToAction("salaSimon"); //https://github.com/Khairul25556/simon-game/tree/main
+    }
 
     public IActionResult Privacy()
     {

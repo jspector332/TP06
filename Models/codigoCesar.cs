@@ -1,55 +1,43 @@
 namespace tp06.Models;
-publlic class codigoCesar
+
+public class codigoCesar
 {
-   public  int corrimiento {get;set;}
-    public string letra {get;set;}
-    public int indiceLetra {get;set;}
-    public int posicionLetra {get;set;}
-    public string mensaje {get;set;} = "";
-    list <char> abecedario = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' } = new list <char>;
-    
-    private string codigo(){
-        
+    public int corrimiento { get; set; }
+    public string letra { get; set; } = "";
+    public int indiceLetra { get; set; }
+    public int posicionLetra { get; set; }
+    public string mensaje { get; set; } = "";
+
+    private readonly List<char> abecedario = new List<char>
+    {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+    };
+
+    public string codigo()
+    {
+        mensaje = "";
         foreach (char c in letra)
         {
-        indiceLetra = buscar(c, corrimiento, abecedario);
-        posicionLetra = (indiceLetra + corrimiento ) %26;
-       
-        
-        if (indiceLetra == -1){
-            mensaje += c;
+            int indiceLetra = buscar(c);
+
+            if (indiceLetra == -1)
+            {
+                mensaje += c;
+            }
+            else
+            {
+                int nuevaPosicion = (indiceLetra + corrimiento) % 26;
+                mensaje += abecedario[nuevaPosicion];
+            }
         }
-            
-        else{
-             mensaje += abecedario[posicionLetra];
-        }
-           
-        }
-         return(mensaje);
+        return mensaje;
     }
-    
 
-    
-}
-
-private int buscar(char c, int corrimiento, list  abecedario)
-{
-    int i = 0;
-    int posicion = -1;
-    while (i < abecedario.Length && posicion == -1)
+    public int buscar(char c)
     {
-        if (abecedario[i] == c)
-        {
-            posicion = i;
-        }
-        else
-        {
-            i++;
-           
-        }
-
+        return abecedario.IndexOf(c);
     }
-    return posicion;
 }
 
    
