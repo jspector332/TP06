@@ -8,9 +8,11 @@ public class BD{
     public string mensajeCodigo()
     {
         string codigo = null;
+        Random rnd = new Random();
+        int idRandom = rnd.Next(1, 5);
         using(SqlConnection connection = new SqlConnection(_connectionString)){
-            string query = "SELECT mensaje FROM CodigoCesar WHERE id = 1";
-            codigo = connection.QueryFirstOrDefault<string>(query, new {id = 1});
+            string query = "SELECT mensaje FROM CodigoCesar WHERE id = @idRandom";
+            codigo = connection.QueryFirstOrDefault<string>(query, new {idRandom});
         }
         return codigo.ToUpper();
     }

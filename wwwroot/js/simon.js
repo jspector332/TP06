@@ -1,129 +1,106 @@
-﻿
-let gameSeq = [];
-let userSeq = [];
-
-let btns = ['red', 'yellow', 'green', 'purple'];
-
-let started = false; //*Just storing false
-let level = 0;
-
-let h2 = document.querySelector('h2');
-
-//**1st Process
-
-document.addEventListener('keypress', startGame);
-document.addEventListener('touchstart', startGame);
-function startGame(event) {
-    if (!started) {  //* Only runs if the game hasn't started
-        console.log('Game is started');
-        started = true;
-        levelUp();
+﻿var buttonColors=["red", "blue", "green", "yellow"];
+var gamePattern=[];
+var userClickedPattern=[];
+var started=false;
+var gameWon = false;
+var level=0;
+$(document).on("keypress",function(event){
+    if(!started){
+        $("#level-title").text("Level "+level);
+        nextSequence();
+        started=true;
     }
-}
-
-
-// document.addEventListener('keypress', function() {   
-//     if (started == false){ //* Code checks the value of started
-//         console.log('game is started');
-//         started = true; //* Now we change it to true
-//         levelUp();
-//     }
-// });
-
-
-
-function gameFlash(btn) {
-    btn.classList.add('flash');
-    setTimeout(function(){
-        btn.classList.remove('flash');
-    }, 250);
-}
-
-function userFlash(btn) {
-    btn.classList.add('userFlash');
-    setTimeout(function(){
-        btn.classList.remove('userFlash');
-    }, 250);
-}
-//**2nd Process */
-function levelUp() { //*while leveling up we need to change h2 and random button will flash
-    userSeq = []; //*when leveling up, userSeq will be reset. So we need to select button from the begining everytime
+});
+$(".btn").on("click",function(){
+    if(gameWon) return;
+    var userChosenColour=$(this).attr("id");
+    userClickedPattern.push(userChosenColour);
+    playSound(userChosenColour);
+    animatePress(userChosenColour);
+    checkAnswer(userClickedPattern.length-1);
+});
+function nextSequence(){
+    userClickedPattern = [];
     level++;
-    h2.style.animation = 'none';
-    h2.innerText = `Level ${level}`; //* h2 will change here
-    let randIdx = Math.floor(Math.random() * 3); //* simple generating random num between 0 and 3
-    let randColor = btns[randIdx]; //* now in randColor can  access rnadom Index that means specific button will be selected
-    let randBtn = document.querySelector (`.${randColor}`); //* for accessing the button
-    // console.log(randIdx);
-    // gameSeq.push(randColor);
-    // console.log(randBtn);
-    gameSeq.push(randColor);
-    console.log(gameSeq);
-    gameFlash(randBtn); //* passing the randBtn variable to flash random button
-};
+    $("#level-title").text("Nivel " + level);
+    // Si llegamos al nivel 10, detener y mostrar mensaje de victoria
+    if(level >= 10){
+        showWin();
+        return;
+    }
+    var randomNumber = Math.floor(Math.random() * 4);
+    var randomChosenColour = buttonColors[randomNumber];
+    gamePattern.push(randomChosenColour);
 
-let highestScoreElement = document.querySelector('#highest-score'); //* Element to show highest score
-
-//* Get the highest score from localStorage (or default to 0)
-let highestScore;
-
-if (localStorage.getItem('highestScore')) {
-    //* If there's a saved highest score in localStorage, get it and parse it to an integer
-    highestScore = parseInt(localStorage.getItem('highestScore'));
-} else {
-    //* If no score is saved in localStorage, set highestScore to 0
-    highestScore = 0;
-}
-
-highestScoreElement.innerText = `Highest Score: ${highestScore}`;
-
-//**5th Process */
-function checkAns(idx) {
-   
-    if (userSeq[idx] === gameSeq[idx]) {
-        if(userSeq.length == gameSeq.length){
-            setTimeout(levelUp, 1000);
-        }
-    } else{
-        h2.innerHTML = `Game over! Your score is <b>${level}</b>.<br>Press any key to start`;
-        // document.querySelector('body').style.backgroundColor = 'red';
-        document.querySelector('body').classList.remove('img');
-        setTimeout(function(){
-            document.querySelector('body').classList.add('img');
-            // document.querySelector('body').style.backgroundColor = 'white';
-        }, 350);
-
-        if (level > highestScore) {
-            highestScore = level;
-            localStorage.setItem('highestScore', highestScore); // Save highest score to localStorage
-            highestScoreElement.innerText = `Highest Score: ${highestScore}`;
-        }
-        reset();
-        
+    // Reproducir toda la secuencia guardada en orden
+    for (let i = 0; i < gamePattern.length; i++) {
+        let col = gamePattern[i];
+        setTimeout(function() {
+            $("#" + col).fadeIn(100).fadeOut(100).fadeIn(100);
+            playSound(col);
+        }, i * 600); // 600ms entre cada color (ajustable)
     }
 }
-
-//**3rd Process */ conneted to 5th process */
-function btnPress() {
-    let btn = this;
-    userFlash(btn); //* passing the btn(this btn) variable to btnFlash. Now whatever we will click it will flash.
-
-    userColor = btn.getAttribute('id'); //* (the btn we clicked)
-    // console.log(userColor); 
-    userSeq.push(userColor); //* add userColor to userSeq array
-
-    checkAns(userSeq.length - 1); //* check last entered value
+function playSound(name){
+    var audio=new Audio("sounds/"+name+".mp3");
+    audio.play();
+}
+function animatePress(currentColor){
+  $("#"+currentColor).addClass("pressed");
+  setTimeout(function() {
+    $("#" + currentColor).removeClass("pressed");
+  }, 100);
 }
 
-let allBtns = document.querySelectorAll ('.btn');
-for (btn of allBtns) {
-    btn.addEventListener('click',btnPress);
+function checkAnswer(currentLevel){
+    if(gamePattern[currentLevel]==userClickedPattern[currentLevel]){
+        console.log("success");
+        if(gamePattern.length==userClickedPattern.length){
+            setTimeout(function() {
+                nextSequence();
+            }, 1000);
+        }
+    }
+    else{
+        console.log("wrong");
+        playSound("wrong");
+        $("body").addClass("game-over");
+        setTimeout(function(){
+            $("body").removeClass("game-over");
+        },200);
+        $("#level-title").text("Perdiste, presiona cualquier tecla para reiniciar");
+        startOver();
+    }
+    
+}
+function startOver(){
+    level=0;
+    gamePattern=[];
+    started=false;
 }
 
-//**4th Process */ connected to the 5th process */
-function reset() { //*for resetting after game is over
-    started = false;
-    gameSeq = [];
-    userSeq = [];
-    level = 0;
+function showWin(){
+    gameWon = true;
+    // Detener listeners
+    $(document).off('keypress');
+    $('.btn').off('click');
+
+    // Actualizar título
+    $("#level-title").text("¡Ganaste!");
+
+    // Crear overlay y botón para ir a sala 3
+    var overlay = $('<div id="win-overlay" class="win-overlay">'
+        + '<div class="win-box">'
+        + '<h2>¡Ganaste!</h2>'
+        + '<p>Has completado el juego.</p>'
+        + '<button id="next-room" class="next-room">Ir a sala 3</button>'
+        + '</div>'
+        + '</div>');
+
+    $('body').append(overlay);
+
+    $('#next-room').on('click', function(){
+        // Navegar a la acción que lleva a la sala 3
+        window.location.href = '/Home/irASala3';
+    });
 }

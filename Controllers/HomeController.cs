@@ -49,6 +49,15 @@ public class HomeController : Controller
         return RedirectToAction("salaSimon"); //https://github.com/Khairul25556/simon-game/tree/main
     }
 
+    public IActionResult salaSimon(){
+        return View();
+    }
+
+    public IActionResult irASala3()
+    {
+        return RedirectToAction("Index");
+    }
+
     public IActionResult Privacy()
     {
         return View();

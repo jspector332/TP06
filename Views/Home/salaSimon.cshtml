@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>simon-game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="img">
-    <h1>Simon Game</h1>
-    <a href="README.md">Learn HOW TO PLAY!</a>
-    <h2>Press any key to start</h2>
-    <p id="highest-score">Highest Score: 0</p>
-    <div class="btn-container">
-        <div class="line-one">
-            <div class="btn red" type="button" id="red">1</div>
-            <div class="btn yellow" type="button" id="yellow">2</div>
-        </div>
+<html lang="en" dir="ltr">
 
-       <div class="line-two">
-            <div class="btn green" type="button" id="green">3</div>
-            <div class="btn purple" type="button" id="purple">4</div>
-       </div>
-        
+<head>
+  <meta charset="utf-8">
+  <title>Simon</title>
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link rel="stylesheet" href="~/css/simon.css" />
+</head>
+
+<body>
+  <h1 id="level-title">Recorda la secuencia para no caer en el canto de las sirenas. <br> Toca cualquier tecla para comenzar.</h1>
+
+  <div class="simon-wrapper">
+    <div class="simon-container">
+      <div id="green" class="btn green" role="button" aria-label="green"></div>
+      <div id="red" class="btn red" role="button" aria-label="red"></div>
+      <div id="yellow" class="btn yellow" role="button" aria-label="yellow"></div>
+      <div id="blue" class="btn blue" role="button" aria-label="blue"></div>
     </div>
+  </div>
+
 </body>
+
 </html>
