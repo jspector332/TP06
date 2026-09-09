@@ -1,7 +1,7 @@
 <h1>"Hay un mensaje encriptado, decifralo y pasa a la siguente fase"</h1>
 <h2>@ViewBag.mensajeEncriptado</h2>
 <form action='@Url.Action("verificarCodigoC", "Home")' method="post">
-    <input type ="text" name ="input" minlength="5"></input>
+    <input type ="text" name ="input" minlength="4"></input>
     <input type="hidden" name="msj" value="@ViewBag.mensajeOriginal">
     <button type =submit>Enviar</button>
 </form>

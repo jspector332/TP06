@@ -24,7 +24,7 @@ function nextSequence(){
     level++;
     $("#level-title").text("Nivel " + level);
     // Si llegamos al nivel 10, detener y mostrar mensaje de victoria
-    if(level >= 10){
+    if(level >= 2){
         showWin();
         return;
     }
