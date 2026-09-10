@@ -59,6 +59,10 @@ function play(){
                         score_val.innerHTML =+ score_val.innerHTML + 1;
                         sound_point.play();
                     }
+                    if(Number(score_val.innerHTML) >= 3){
+                            showWin();
+                            return;
+                    }
                     element.style.left = pipe_sprite_props.left - move_speed + 'px';
                 }
             }
@@ -126,4 +130,26 @@ function play(){
         requestAnimationFrame(create_pipe);
     }
     requestAnimationFrame(create_pipe);
+}
+
+function showWin(){
+    if(gameWon) return;
+    gameWon = true;
+    game_state = 'End';
+
+    const overlay = document.createElement('div');
+    overlay.id = 'bird-win-overlay';
+    overlay.className = 'win-overlay';
+    overlay.innerHTML = `
+        <div class="win-box">
+            <h2>¡Ganaste!</h2>
+            <p>Has llegado a 20 puntos.</p>
+            <button id="bird-restart" class="next-room">Ir a sala 4</button>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    document.getElementById('bird-restart').addEventListener('click', () => {
+        window.location.href = '/Home/irASala4';
+    });
 }

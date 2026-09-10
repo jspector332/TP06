@@ -62,6 +62,19 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult irASala4()
+    {
+        return RedirectToAction("salaTrivia");
+    }
+
+    public IActionResult salaTrivia(){
+        
+        ViewBag.pregunta1 = bd.obtenerPregunta(1);
+        ViewBag.pregunta2 = bd.obtenerPregunta(2);
+        ViewBag.pregunta3 = bd.obtenerPregunta(3);
+        return View();
+    }
+
     public IActionResult Privacy()
     {
         return View();

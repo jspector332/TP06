@@ -16,4 +16,24 @@ public class BD{
         }
         return codigo.ToUpper();
     }
+
+    public string obtenerPregunta(int num)
+    {
+        string trivia = null;
+        using(SqlConnection connection = new SqlConnection(_connectionString)){
+            string query = "SELECT Pregunta FROM Preguntas WHERE id = @num";
+            trivia = connection.QueryFirstOrDefault<string>(query, new {num});
+        }
+        return trivia;
+    }
+
+    public string chequearRespuesta(int num)
+    {
+        string respuesta = null;
+        using(SqlConnection connection = new SqlConnection(_connectionString)){
+            string query = "SELECT Respuesta FROM Preguntas WHERE id = @num";
+            respuesta = connection.QueryFirstOrDefault<string>(query, new {num});
+        }
+        return respuesta.ToUpper();
+    }
 }
