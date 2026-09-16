@@ -1,30 +1,36 @@
-<h1>llegaste a la isla de calipso, intenta recordar el pasado para poder escarpar</h1>
-<h3>@ViewBag.pregunta1</h3>
-<form action='@Url.Action("VerificarTrivia", "Home")' method="get">
- <input type="radio" name="Polifemo" value="Polifemo"> Polifemo
- <input type="radio" name="Antinoo" value="Antinoo"> Antinoo
- <input type="radio" name="Euriloco" value="Euriloco"> Euriloco
- <input type="radio" name="Elpenor" value="Elpenor"> Elpenor
-    <input type="submit" value="Enviar">
-    <input type="reset" value="Limpiar">
-</form>
+@{
+    var id = (int)ViewBag.idPregunta;
+}
+<h1>Llegaste a la isla de calipso, intenta recordar el pasado para poder escapar</h1>
 
-<h3>@ViewBag.pregunta2</h3>
-<form action='@Url.Action("VerificarTrivia", "Home")' method="get">
- <input type="radio" name="Calipso" value="Calipso"> Calipso
- <input type="radio" name="Circe" value="Circe"> Circe
- <input type="radio" name="Nausicaa" value="Nausicaa"> Nausicaa
- <input type="radio" name="Penelope" value="Penelope"> Penelope
-    <input type="submit" value="Enviar">
-    <input type="reset" value="Limpiar">
-</form>
+<h3>@ViewBag.pregunta</h3>
 
-<h3>@ViewBag.pregunta3</h3>
 <form action='@Url.Action("VerificarTrivia", "Home")' method="get">
- <input type="radio" name="Tiresias" value="Tiresias"> Tiresias
- <input type="radio" name="Eumeo" value="Eumeo"> Eumeo
- <input type="radio" name="Cerbero" value="Cerbero"> Cerbero
- <input type="radio" name="Argos" value="Argos"> Argos
-    <input type="submit" value="Enviar">
-    <input type="reset" value="Limpiar">
+    <input type="hidden" name="idPregunta" value="@id" />
+    @if (id == 1) {
+        <text>
+            <label><input type="radio" name="respuesta" value="Polifemo" required /> Polifemo</label>
+            <label><input type="radio" name="respuesta" value="Antinoo" /> Antinoo</label>
+            <label><input type="radio" name="respuesta" value="Euriloco" /> Euriloco</label>
+            <label><input type="radio" name="respuesta" value="Elpenor" /> Elpenor</label>
+        </text>
+    } else if (id == 2) {
+        <text>
+            <label><input type="radio" name="respuesta" value="Calipso" required /> Calipso</label>
+            <label><input type="radio" name="respuesta" value="Circe" /> Circe</label>
+            <label><input type="radio" name="respuesta" value="Nausicaa" /> Nausicaa</label>
+            <label><input type="radio" name="respuesta" value="Penelope" /> Penelope</label>
+        </text>
+    } else if (id == 3) {
+        <text>
+            <label><input type="radio" name="respuesta" value="Tiresias" required /> Tiresias</label>
+            <label><input type="radio" name="respuesta" value="Eumeo" /> Eumeo</label>
+            <label><input type="radio" name="respuesta" value="Cerbero" /> Cerbero</label>
+            <label><input type="radio" name="respuesta" value="Argos" /> Argos</label>
+        </text>
+    }
+    <div>
+        <input type="submit" value="Enviar" />
+        <input type="reset" value="Limpiar" />
+    </div>
 </form>

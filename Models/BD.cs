@@ -27,7 +27,7 @@ public class BD{
         return trivia;
     }
 
-    public string chequearRespuesta(int num)
+    public string obtenerRespuesta(int num)
     {
         string respuesta = null;
         using(SqlConnection connection = new SqlConnection(_connectionString)){

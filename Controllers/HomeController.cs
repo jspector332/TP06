@@ -67,11 +67,31 @@ public class HomeController : Controller
         return RedirectToAction("salaTrivia");
     }
 
-    public IActionResult salaTrivia(){
+    public IActionResult salaTrivia(int id = 1){
         
         ViewBag.pregunta1 = bd.obtenerPregunta(1);
         ViewBag.pregunta2 = bd.obtenerPregunta(2);
         ViewBag.pregunta3 = bd.obtenerPregunta(3);
+        // mostrar una pregunta a la vez; id indica cuál mostrar (1..3)
+        ViewBag.pregunta = bd.obtenerPregunta(id);
+        ViewBag.idPregunta = id;
+        return View();
+    }
+
+    // recibe una sola respuesta y el id de la pregunta actual
+    public IActionResult VerificarTrivia(string respuesta, int idPregunta){
+        var correcta = bd.obtenerRespuesta(idPregunta);
+        // comparar trim + case-insensitive para evitar fallos por mayúsculas/espacios
+        if (!string.IsNullOrEmpty(respuesta) && !string.IsNullOrEmpty(correcta) &&
+            string.Equals(respuesta.Trim(), correcta.Trim(), StringComparison.OrdinalIgnoreCase))
+        {
+            if (idPregunta < 3) return RedirectToAction("salaTrivia", new { id = idPregunta + 1 });
+            return RedirectToAction("salaFinal");
+        }
+        return RedirectToAction("irASala3");
+    }
+
+    public IActionResult salaFinal(){
         return View();
     }
 

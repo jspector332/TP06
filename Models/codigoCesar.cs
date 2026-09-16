@@ -27,7 +27,8 @@ public class codigoCesar
             }
             else
             {
-                int nuevaPosicion = (indiceLetra + corrimiento) % 26;
+                int nuevaPosicion = 
+                (indiceLetra + corrimiento) % 26;
                 mensaje += abecedario[nuevaPosicion];
             }
         }

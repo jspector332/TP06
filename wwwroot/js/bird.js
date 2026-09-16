@@ -17,6 +17,8 @@ let score_title = document.querySelector('.score_title');
 let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
+// variable local para evitar colisiones con otros scripts
+let birdGameWon = false;
 
 document.addEventListener('keydown', (e) => {
     
@@ -49,7 +51,7 @@ function play(){
             }else{
                 if(bird_props.left < pipe_sprite_props.left + pipe_sprite_props.width && bird_props.left + bird_props.width > pipe_sprite_props.left && bird_props.top < pipe_sprite_props.top + pipe_sprite_props.height && bird_props.top + bird_props.height > pipe_sprite_props.top){
                     game_state = 'End';
-                    message.innerHTML = 'Game Over'.fontcolor('red') + '<br>Press Enter To Restart';
+                    message.innerHTML = '<span style="font-family: \'GreekFreak\', Arial;">Game Over</span>'.fontcolor('red') + '<br>Press Enter To Restart';
                     message.classList.add('messageStyle');
                     img.style.display = 'none';
                     sound_die.play();
@@ -133,10 +135,10 @@ function play(){
 }
 
 function showWin(){
-    if(gameWon) return;
-    gameWon = true;
+    if(birdGameWon) return;
+    birdGameWon = true;
     game_state = 'End';
-
+ 
     const overlay = document.createElement('div');
     overlay.id = 'bird-win-overlay';
     overlay.className = 'win-overlay';
@@ -148,7 +150,7 @@ function showWin(){
         </div>
     `;
     document.body.appendChild(overlay);
-
+ 
     document.getElementById('bird-restart').addEventListener('click', () => {
         window.location.href = '/Home/irASala4';
     });

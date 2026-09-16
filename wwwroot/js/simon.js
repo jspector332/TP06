@@ -1,9 +1,15 @@
-﻿var buttonColors=["red", "blue", "green", "yellow"];
+﻿(function () {
+"use strict";
+
+var buttonColors=["red", "blue", "green", "yellow"];
 var gamePattern=[];
 var userClickedPattern=[];
 var started=false;
 var gameWon = false;
 var level=0;
+var isPlayingSequence = false;
+const WIN_LEVEL = 3; // ajustar al nivel deseado
+
 $(document).on("keypress",function(event){
     if(!started){
         $("#level-title").text("Level "+level);
@@ -12,7 +18,7 @@ $(document).on("keypress",function(event){
     }
 });
 $(".btn").on("click",function(){
-    if(gameWon) return;
+    if(gameWon || isPlayingSequence) return;
     var userChosenColour=$(this).attr("id");
     userClickedPattern.push(userChosenColour);
     playSound(userChosenColour);
@@ -22,10 +28,12 @@ $(".btn").on("click",function(){
 function nextSequence(){
     userClickedPattern = [];
     level++;
-    $("#level-title").text("Nivel " + level);
-    // Si llegamos al nivel 10, detener y mostrar mensaje de victoria
-    if(level >= 2){
+    $("#level-title").html('<span style="font-family: \'GreekFreak\', cursive;">Nivel ' + level + '</span>');
+    isPlayingSequence = true;
+    // Mostrar victoria al alcanzar WIN_LEVEL
+    if(level === WIN_LEVEL){
         showWin();
+        isPlayingSequence = false;
         return;
     }
     var randomNumber = Math.floor(Math.random() * 4);
@@ -40,6 +48,10 @@ function nextSequence(){
             playSound(col);
         }, i * 600); // 600ms entre cada color (ajustable)
     }
+    // Liberar entradas del usuario tras terminar la reproducción
+    setTimeout(function() {
+        isPlayingSequence = false;
+    }, gamePattern.length * 600 + 100);
 }
 function playSound(name){
     var audio=new Audio("sounds/"+name+".mp3");
@@ -68,7 +80,7 @@ function checkAnswer(currentLevel){
         setTimeout(function(){
             $("body").removeClass("game-over");
         },200);
-        $("#level-title").text("Perdiste, presiona cualquier tecla para reiniciar");
+        $("#level-title").html('<span style="font-family: \'GreekFreak\', cursive;">Perdiste, presiona cualquier tecla para reiniciar</span>');
         startOver();
     }
     
@@ -77,6 +89,8 @@ function startOver(){
     level=0;
     gamePattern=[];
     started=false;
+    gameWon = false;
+    isPlayingSequence = false;
 }
 
 function showWin(){
@@ -86,7 +100,7 @@ function showWin(){
     $('.btn').off('click');
 
     // Actualizar título
-    $("#level-title").text("¡Ganaste!");
+    $("#level-title").html('<span style="font-family: \'GreekFreak\', cursive;">¡Ganaste!</span>');
 
     // Crear overlay y botón para ir a sala 3
     var overlay = $('<div id="win-overlay" class="win-overlay">'
@@ -104,3 +118,5 @@ function showWin(){
         window.location.href = '/Home/irASala3';
     });
 }
+
+})();
