@@ -30,7 +30,7 @@ document.addEventListener('keydown', (e) => {
         bird.style.top = '40vh';
         game_state = 'Play';
         message.innerHTML = '';
-        score_title.innerHTML = 'Score : ';
+        score_title.innerHTML = 'Puntaje : ';
         score_val.innerHTML = '0';
         message.classList.remove('messageStyle');
         play();
@@ -144,9 +144,9 @@ function showWin(){
     overlay.className = 'win-overlay';
     overlay.innerHTML = `
         <div class="win-box">
-            <h2>¡Ganaste!</h2>
-            <p>Has llegado a 20 puntos.</p>
-            <button id="bird-restart" class="next-room">Ir a sala 4</button>
+            <h2>¡Felicidades!</h2>
+            <p>Tu barco ha llegado a la costa.</p>
+            <button id="bird-restart" class="next-room">Despierta en la isla...</button>
         </div>
     `;
     document.body.appendChild(overlay);

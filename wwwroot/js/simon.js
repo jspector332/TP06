@@ -105,9 +105,9 @@ function showWin(){
     // Crear overlay y botón para ir a sala 3
     var overlay = $('<div id="win-overlay" class="win-overlay">'
         + '<div class="win-box">'
-        + '<h2>¡Ganaste!</h2>'
-        + '<p>Has completado el juego.</p>'
-        + '<button id="next-room" class="next-room">Ir a sala 3</button>'
+        + '<h2>¡Felicidades!</h2>'
+        + '<p>Resististe el canto de las sirenas.</p>'
+        + '<button id="next-room" class="next-room">Siguiente desafio</button>'
         + '</div>'
         + '</div>');
 

@@ -40,7 +40,8 @@ public class HomeController : Controller
             return RedirectToAction("irASala2");
         }
         else{
-            return RedirectToAction("index");
+            ViewBag.Error = "El mensaje ingresado es incorrecto. Intenta nuevamente.";
+            return RedirectToAction("irASala1");
         }
     }
 

@@ -26,14 +26,19 @@ html {
 }
 
 html {
+  height: 100%;
   position: relative;
   min-height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-body {
-  margin-bottom: 60px;
-  margin: 0%;
-  padding: 0%;
+body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  height: 100%;
+  /* fondo en body para cubrir toda la pantalla */
   overflow: hidden;
 }
 
@@ -44,4 +49,122 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+.indexdiv{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* full-bleed: use viewport width but center to escape parent padding */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* cubre todo el ancho del viewport */
+  max-width: none !important;
+  min-height: 100vh; /* asegura que cubra al menos toda la ventana */
+  height: 100vh;     /* fuerza a cubrir exactamente la altura de la ventana */
+  background-image: url('../imagenes/odiseaa.png');
+  background-size: cover;
+  background-position: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+.indexdiv h1{
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.indexdiv button{
+  background-color: #E6E0D5;
+  color: #1A2433;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 15px;
+}
+
+.cesardiv{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* cubre todo el ancho del viewport */
+  max-width: none !important;
+  min-height: 100vh; /* asegura que cubra al menos toda la ventana */
+  height: 100vh;     /* fuerza a cubrir exactamente la altura de la ventana */
+  background-image: url('../imagenes/fondocesar.png');
+  background-size: cover;
+  background-position: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  text-align: center;
+  gap: 1rem;
+}
+
+.cesardiv h1{
+  color: white; /* similar a indexdiv h1 */
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.cesardiv h2{
+  color: white; /* similar a indexdiv h1 */
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+
+
+.cesardiv form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 520px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.cesardiv input[type="text"]{
+  width: 100%;
+  padding: 0.9rem 1rem;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  background-color: rgba(230,224,213,0.95); /* parecido al botón */
+  color: #1A2433;
+  box-sizing: border-box;
+}
+
+.cesardiv button{
+  background-color: #E6E0D5; /* mismo estilo que indexdiv button */
+  color: #1A2433;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 15px;
+}
+
+.cesardiv img{
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin-top: 1rem;
 }

@@ -1,3 +1,8 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
 body {
   text-align: center;
   background-color: azure;
@@ -5,11 +10,26 @@ body {
   font-family: 'GreekFreak', Arial, Helvetica, sans-serif;
 }
 
+.simon-body {
+  text-align: center;
+  background-color: azure;
+  margin: 0;
+  font-family: 'GreekFreak', Arial, Helvetica, sans-serif;
+  height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+  background-image: url('../imagenes/simon.png');
+  background-size: cover;
+  background-position: center;
+}
+
 #level-title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 2rem;
+  font-size: 2.25rem;
   margin: 24px 0;
-  color: #FEF2BF;
+  color: black;
 }
 
 .game-over {
@@ -17,10 +37,10 @@ body {
   opacity: 0.8;
 }
 
-.red { background-color: #e74c3c; }
-.green { background-color: #2ecc71; }
-.blue { background-color: #3498db; }
-.yellow { background-color: #f1c40f; }
+.red { background-color: #3B4A5A; }
+.green { background-color: #B8A58A; }
+.blue { background-color: #E6E0D5; }
+.yellow { background-color: #c92813; }
 
 .pressed {
   box-shadow: 0 0 20px white;
