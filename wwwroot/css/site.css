@@ -74,7 +74,7 @@ body{
 
 .indexdiv h1{
   color: white;
-  font-size: 3rem;
+  font-size: 8rem;
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -140,9 +140,9 @@ body{
 }
 
 .cesardiv input[type="text"]{
-  width: 100%;
+  width: 140%;
   padding: 0.9rem 1rem;
-  font-size: 1.1rem;
+  font-size: 1.9rem;
   border-radius: 12px;
   border: none;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -167,4 +167,180 @@ body{
   height: auto;
   display: block;
   margin-top: 1rem;
+}
+
+.sala-trivia{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* cubre todo el ancho del viewport */
+  max-width: none !important;
+  min-height: 100vh; /* asegura que cubra al menos toda la ventana */
+  height: 100vh;     /* fuerza a cubrir exactamente la altura de la ventana */
+  background-image: url('../imagenes/fondotrivia.png');
+  background-size: cover;
+  background-position: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+  text-align: center;
+  gap: 1rem;
+}
+
+.sala-trivia div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  max-width: 900px;
+}
+
+.sala-trivia form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
+
+.sala-trivia form label{
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  gap: 0.75rem;
+  width: min(100%, 520px);
+  padding: 0.9rem 1.1rem;
+  border-radius: 14px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  text-align: left;
+}
+
+.sala-trivia form label:hover{
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.sala-trivia input[type="radio"]{
+  accent-color: #e6e0d5;
+  transform: scale(1.15);
+  flex-shrink: 0;
+}
+
+.sala-trivia form > div{
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.sala-trivia input[type="submit"],
+.sala-trivia input[type="reset"]{
+  background-color: #e6e0d5;
+  color: #1a2433;
+  border: none;
+  padding: 0.9rem 1.6rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 14px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.sala-trivia input[type="submit"]:hover,
+.sala-trivia input[type="reset"]:hover{
+  background-color: #f2ece2;
+  transform: translateY(-1px);
+}
+
+.sala-trivia h1{
+  color: white; /* similar a indexdiv h1 */
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sala-trivia h3{
+  color: white; /* similar a indexdiv h1 */
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.codigo-error{
+  color: #ffb4b4;
+  background-color: rgba(120, 0, 0, 0.35);
+  border: 1px solid rgba(255, 180, 180, 0.45);
+  padding: 3rem 1.1rem;
+  font-size: 2rem;
+  border-radius: 12px;
+  width: min(100%, 520px);
+  text-align: center;
+  margin: 0.5rem 0;
+}
+
+.trivia-error{
+  color: #ffb4b4;
+  background-color: rgba(120, 0, 0, 0.35);
+  border: 1px solid rgba(255, 180, 180, 0.45);
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  width: min(100%, 520px);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.finaldiv{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* cubre todo el ancho del viewport */
+  max-width: none !important;
+  min-height: 100vh; /* asegura que cubra al menos toda la ventana */
+  height: 100vh;     /* fuerza a cubrir exactamente la altura de la ventana */
+  background-image: url('../imagenes/fondofinal.png');
+  background-size: cover;
+  background-position: center;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+
+.finaldiv h1{
+  color: white; /* similar a indexdiv h1 */
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2%;
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.finaldiv button{
+  background-color: #E6E0D5; /* mismo estilo que indexdiv button */
+  color: #1A2433;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 15px;
 }

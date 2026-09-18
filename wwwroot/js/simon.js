@@ -5,19 +5,22 @@ var buttonColors=["red", "blue", "green", "yellow"];
 var gamePattern=[];
 var userClickedPattern=[];
 var started=false;
+var startPending = false;
 var gameWon = false;
 var level=0;
 var isPlayingSequence = false;
-const WIN_LEVEL = 3; // ajustar al nivel deseado
+const WIN_LEVEL = 9; // ajustar al nivel deseado
 
 $(document).on("keypress",function(event){
     if(!started){
-        $("#level-title").text("Level "+level);
-        nextSequence();
-        started=true;
+        startGameDelayed();
     }
 });
 $(".btn").on("click",function(){
+    if(!started){
+        startGameDelayed();
+        return;
+    }
     if(gameWon || isPlayingSequence) return;
     var userChosenColour=$(this).attr("id");
     userClickedPattern.push(userChosenColour);
@@ -44,8 +47,12 @@ function nextSequence(){
     for (let i = 0; i < gamePattern.length; i++) {
         let col = gamePattern[i];
         setTimeout(function() {
-            $("#" + col).fadeIn(100).fadeOut(100).fadeIn(100);
+            var $btn = $("#" + col);
+            $btn.addClass("sequence-flash");
             playSound(col);
+            setTimeout(function() {
+                $btn.removeClass("sequence-flash");
+            }, 280);
         }, i * 600); // 600ms entre cada color (ajustable)
     }
     // Liberar entradas del usuario tras terminar la reproducción
@@ -89,8 +96,26 @@ function startOver(){
     level=0;
     gamePattern=[];
     started=false;
+    startPending = false;
     gameWon = false;
     isPlayingSequence = false;
+}
+
+function startGame(){
+    $("#level-title").text("Level "+level);
+    nextSequence();
+    started=true;
+}
+
+function startGameDelayed(){
+    if(started || startPending) return;
+    startPending = true;
+    $("#level-title").text("Preparando...");
+    setTimeout(function(){
+        if(started) return;
+        startPending = false;
+        startGame();
+    }, 700);
 }
 
 function showWin(){

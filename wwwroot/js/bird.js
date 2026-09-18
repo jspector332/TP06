@@ -21,6 +21,7 @@ message.classList.add('messageStyle');
 let birdGameWon = false;
 
 document.addEventListener('keydown', (e) => {
+    if (birdGameWon) return;
     
     if(e.key == 'Enter' && game_state != 'Play'){
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
@@ -38,8 +39,9 @@ document.addEventListener('keydown', (e) => {
 });
 
 function play(){
+    if (birdGameWon) return;
     function move(){
-        if(game_state != 'Play') return;
+        if(game_state != 'Play' || birdGameWon) return;
 
         let pipe_sprite = document.querySelectorAll('.pipe_sprite');
         pipe_sprite.forEach((element) => {
@@ -61,7 +63,7 @@ function play(){
                         score_val.innerHTML =+ score_val.innerHTML + 1;
                         sound_point.play();
                     }
-                    if(Number(score_val.innerHTML) >= 3){
+                    if(Number(score_val.innerHTML) >= 14){
                             showWin();
                             return;
                     }
@@ -75,9 +77,10 @@ function play(){
 
     let bird_dy = 0;
     function apply_gravity(){
-        if(game_state != 'Play') return;
+        if(game_state != 'Play' || birdGameWon) return;
         bird_dy = bird_dy + grativy;
         document.addEventListener('keydown', (e) => {
+            if (birdGameWon) return;
             if(e.key == 'ArrowUp' || e.key == ' '){
                 img.src = '/imagenes/Bird-2.png';
                 bird_dy = -7.6;
@@ -85,6 +88,7 @@ function play(){
         });
 
         document.addEventListener('keyup', (e) => {
+            if (birdGameWon) return;
             if(e.key == 'ArrowUp' || e.key == ' '){
                 img.src = '/imagenes/Bird.png';
             }

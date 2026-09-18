@@ -3,9 +3,16 @@
 @{
     var id = (int)ViewBag.idPregunta;
 }
+
+<div>
 <h1>Llegaste a la isla de calipso, intenta recordar el pasado para poder escapar</h1>
 
 <h3>@ViewBag.pregunta</h3>
+
+@if (TempData["TriviaError"] != null)
+{
+    <p class="trivia-error">@TempData["TriviaError"]</p>
+}
 
 <form action='@Url.Action("VerificarTrivia", "Home")' method="get">
     <input type="hidden" name="idPregunta" value="@id" />
@@ -36,4 +43,5 @@
         <input type="reset" value="Limpiar" />
     </div>
 </form>
+</div>
 </section>

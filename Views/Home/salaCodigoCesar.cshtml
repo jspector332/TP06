@@ -2,8 +2,11 @@
 <h1>"Hay un mensaje encriptado, decifralo y pasa a la siguente fase"</h1>
 <h2>El abecedario se mueve 5 letras hacia atras...</h2>
 <h1>@ViewBag.mensajeEncriptado</h1>
-<h1>@ViewBag.Error</h1>
-<form action='@Url.Action("verificarCodigoC", "Home")' method="post">
+@if (TempData["CodigoError"] != null)
+{
+    <p class="codigo-error">@TempData["CodigoError"]</p>
+}
+<form action='@Url.Action("verificarCodigoC", "Home")' method="post" autocomplete="off">
     <input type ="text" name ="input" minlength="4"></input>
     <input type="hidden" name="msj" value="@ViewBag.mensajeOriginal">
     <button type =submit>Enviar</button>

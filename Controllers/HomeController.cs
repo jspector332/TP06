@@ -40,8 +40,8 @@ public class HomeController : Controller
             return RedirectToAction("irASala2");
         }
         else{
-            ViewBag.Error = "El mensaje ingresado es incorrecto. Intenta nuevamente.";
-            return RedirectToAction("irASala1");
+            TempData["CodigoError"] = "El mensaje ingresado es incorrecto. Intenta nuevamente.";
+            return RedirectToAction("salaCodigoCesar");
         }
     }
 
@@ -89,7 +89,8 @@ public class HomeController : Controller
             if (idPregunta < 3) return RedirectToAction("salaTrivia", new { id = idPregunta + 1 });
             return RedirectToAction("salaFinal");
         }
-        return RedirectToAction("irASala3");
+        TempData["TriviaError"] = "Respuesta incorrecta. Volvé a intentar desde la pregunta 1.";
+        return RedirectToAction("salaTrivia", new { id = 1 });
     }
 
     public IActionResult salaFinal(){
